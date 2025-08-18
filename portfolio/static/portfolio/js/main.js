@@ -39,24 +39,42 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Typing Effect (Hero) ===
   const typingEl = document.getElementById('typing');
-  const roles = ['Web Developer 💻', 'Python Programmer 🐍', 'Cybersecurity Enthusiast 🔐'];
+  const roles = window.portfolioRoles || ['Web Developer 💻', 'Python Programmer 🐍', 'Cybersecurity Enthusiast 🔐'];
   let roleIndex = 0, charIndex = 0;
   function typeRole() {
     if (!typingEl) return;
     const role = roles[roleIndex];
-    typingEl.textContent = role.slice(0, ++charIndex);
-    if (charIndex <= role.length) setTimeout(typeRole, 90);
-    else setTimeout(eraseRole, 1500);
-  }
-  function eraseRole() {
-    const role = roles[roleIndex];
-    typingEl.textContent = role.slice(0, --charIndex);
-    if (charIndex > 0) setTimeout(eraseRole, 50);
-    else {
-      roleIndex = (roleIndex + 1) % roles.length;
-      setTimeout(typeRole, 400);
+    // Разделяем текст и эмодзи
+    const match = role.match(/^(.+?)([\p{Emoji}])$/u);
+    const text = match ? match[1] : role; // Текст без эмодзи
+    const emoji = match ? match[2] : ''; // Эмодзи, если есть
+    typingEl.textContent = text.slice(0, charIndex);
+    if (charIndex < text.length) {
+        charIndex++;
+        setTimeout(typeRole, 90);
+    } else {
+        // Добавляем эмодзи в конце, если есть
+        if (emoji) typingEl.innerHTML = text + '<span class="emoji">' + emoji + '</span>';
+        setTimeout(eraseRole, 1500);
     }
   }
+
+  function eraseRole() {
+    const role = roles[roleIndex];
+    const match = role.match(/^(.+?)([\p{Emoji}])$/u);
+    const text = match ? match[1] : role;
+    typingEl.textContent = text.slice(0, charIndex);
+    if (charIndex > 0) {
+        charIndex--;
+        setTimeout(eraseRole, 50);
+    } else {
+        typingEl.textContent = "·"; // Средняя точка
+        roleIndex = (roleIndex + 1) % roles.length;
+        charIndex = 1; // Сбрасываем charIndex
+        setTimeout(typeRole, 400);
+    }
+  }
+
   if (typingEl) typeRole();
 
   // === Welcome Capsule ===
@@ -284,4 +302,24 @@ document.addEventListener('DOMContentLoaded', () => {
     cursor.style.top = `${e.clientY}px`;
     cursor.style.left = `${e.clientX}px`;
   });
+});
+
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+const navBar = document.querySelector('.pill-navbar');
+
+hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+    navBar.classList.toggle('active');
+});
+
+navLinks.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        if (window.innerWidth <= 768) {
+            hamburger.classList.remove('active');
+            navLinks.classList.remove('active');
+            navBar.classList.remove('active');
+        }
+    });
 });

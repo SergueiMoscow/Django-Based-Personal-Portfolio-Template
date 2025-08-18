@@ -1,0 +1,20 @@
+portfolio_config:
+  user_info:
+    portfolio_name: John Doe
+    portfolio_title: Full-Stack Developer
+    portfolio_subtitle: Building innovative web solutions with Python and Django.
+    portfolio_about: I'm a passionate developer with a focus on cybersecurity and scalable apps.
+    roles: [ 'Web Developer 💻', 'Python Programmer 🐍', 'Cybersecurity Enthusiast 🔐' ]
+    resume_pdf: portfolio/files/resume_01.pdf
+  images:
+    avatar_url: /static/portfolio/images/avatar.jpg
+    background_url: /static/portfolio/images/background_1.jpg
+  social_links:
+    portfolio_email: john.doe@example.com
+    portfolio_github_user: johndoe
+    portfolio_linkedin: https://linkedin.com/in/johndoe
+    portfolio_telegram: "@telegram_user"
+  about_me:
+    title: About me
+    phrase_1: I've built tools like <span class="glow-text">Project Name 1</span> and <span class="glow-text">Project Name 2</span>.
+    phrase_2: <strong>Tech Stack:</strong> <span class="highlight">Python</span>, <span class="highlight">Django Basics</span>, <span class="highlight">HTML</span>, <span class="highlight">CSS</span>.

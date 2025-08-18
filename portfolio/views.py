@@ -5,6 +5,8 @@ from pathlib import Path
 from django.conf import settings
 from django.shortcuts import render
 from .forms import ContactForm
+from .models import PortfolioConfig
+
 
 # Load static JSON
 def load_json(filename):
@@ -49,7 +51,8 @@ def get_unique_projects(projects):
 
 # Home Page – show 3 random projects
 def index(request):
-    github_projects = fetch_github_repos("your_github")
+    github_username = PortfolioConfig.objects.filter(block='social_links', key='portfolio_github_user').first().value
+    github_projects = fetch_github_repos(github_username)
     unique_projects = get_unique_projects(github_projects)
     featured = random.sample(unique_projects, min(3, len(unique_projects)))
 
@@ -62,7 +65,8 @@ def index(request):
 
 # Projects Page – all GitHub repos
 def projects(request):
-    github_projects = fetch_github_repos("your_github")
+    github_username = PortfolioConfig.objects.filter(block='social_links', key='portfolio_github_user').first().value
+    github_projects = fetch_github_repos(github_username)
     all_projects = get_unique_projects(github_projects)
     return render(request, 'projects.html', {
         'projects': all_projects

@@ -3,26 +3,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Name | Portfolio</title>
+  <title>{{ portfolio.user_info.portfolio_name }} | Portfolio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="icon" href="{% static 'portfolio/images/favicon.png' %}" />
   <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
   <script defer src="{% static 'portfolio/js/main.js' %}"></script>
+  <script>
+    window.portfolioRoles = {{ portfolio.user_info.roles|safe }};
+  </script>
 </head>
 
 <body>
   <div id="scroll-progress"></div>
 
   <!-- Navbar -->
+  <button class="hamburger" aria-label="Toggle Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
   <nav class="pill-navbar">
-    <img src="{% static 'portfolio/images/avatar.jpg' %}" alt="Avatar" class="navbar-avatar" />
-    <div class="brand">Your Name<br><small>Web Dev</small></div>
-    <a href="#hero" class="nav-link">Home</a>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#projects" class="nav-link">Projects</a>
-    <a href="#certificates" class="nav-link">Certificates</a>
-    <a href="#contact" class="nav-link">Contact</a>
+    <img src="{{ portfolio.images.avatar_url }}" alt="{{ portfolio.user_info.portfolio_name }} Avatar" class="navbar-avatar" />
+    <div class="brand">{{ portfolio.user_info.portfolio_name }}<br><small>{{ portfolio.user_info.portfolio_title }}</small></div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#certificates" class="nav-link">Certificates</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
   </nav>
 
   <!-- Hero -->
@@ -30,14 +40,14 @@
   style="background: linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
          url('{% static 'portfolio/images/background_1.jpg' %}') center/cover no-repeat;">
   
-  <img src="{% static 'portfolio/images/avatar.jpg' %}" alt="Profile Image" class="avatar-hero hero-avatar" />
+  <img src="{{ portfolio.images.avatar_url }}" alt="{{ portfolio.user_info.portfolio_name }} Avatar" class="avatar-hero hero-avatar" />
+  <!-- img src="{% static 'portfolio/images/avatar.jpg' %}" alt="Profile Image" class="avatar-hero hero-avatar" / -->
   
-  <h1 class="title">Hi, I’m Your Name 👋</h1>
+  <h1 class="title">Hi, I’m {{ portfolio.user_info.portfolio_name }} 👋</h1>
   <h3 class="subtitle"><span id="typing"></span></h3>
   
   <p class="subtitle">
-    Crafting secure, scalable apps with Python & Django.<br>
-    Ethical hacking | Developer | cybersecurity enthusiast
+    {{ portfolio.user_info.portfolio_subtitle }}
   </p>
   
   <div class="scroll-down">☟</div>
@@ -49,24 +59,27 @@
  <!-- About -->
 <section id="about" class="section scroll-fade parallax-about">
   <div class="section-header center">
-    <h2 class="section-title">🧠 About Me</h2>
+    <h2 class="section-title"><span class="emoji">🧠</span>{{ portfolio.about_me.title}}</h2>
   </div>
 
   <div class="about-flex responsive-stack">
     <!-- Animated 3D Avatar Frame -->
     <div class="about-avatar-container scroll-fade">
       <div class="avatar-frame-glow">
-        <img src="{% static 'portfolio/images/avatar.jpg' %}" alt="your name Avatar" class="avatar-full" />
+        <!-- img src="{% static 'portfolio/images/avatar.jpg' %}" alt="your name Avatar" class="avatar-full" / -->
+        <img src="{{ portfolio.images.avatar_url }}" alt="your name Avatar" class="avatar-full" />
       </div>
     </div>
 
     <!-- Glass Info Card -->
     <div class="about-glass-card glass-card scroll-fade">
       <p class="about-line">
-        I'm a <span class="glow-text">ABC</span> passionate about building <span class="highlight">secure web apps</span> and exploring <span class="highlight">new tech</span>.
+<!--        I'm a <span class="glow-text">ABC</span> passionate about building <span class="highlight">secure web apps</span> and exploring <span class="highlight">new tech</span>. -->
+          {{ portfolio.about_me.phrase_1 | safe }}
       </p>
       <p class="about-line">
-        I've built tools like <span class="glow-text">Project Name 1</span> and <span class="glow-text">Project Name 2</span>.
+<!--        I've built tools like <span class="glow-text">Project Name 1</span> and <span class="glow-text">Project Name 2</span>. -->
+          {{ portfolio.about_me.phrase_2 | safe }}
       </p>
       <p class="about-line">
         <strong>Tech Stack:</strong> <span class="highlight">Python</span>, <span class="highlight">Django Basics</span>, <span class="highlight">HTML</span>, <span class="highlight">CSS</span>.
@@ -74,10 +87,11 @@
 
       <!-- Contact + Resume Links -->
       <div class="about-links scroll-fade">
-        <a href="mailto:your_email" class="text-link glow-link" target="_blank">📧 Email</a>
-        <a href="https://github.com/your_github" class="text-link glow-link" target="_blank">🌐 GitHub</a>
-        <a href="https://linkdin_profile" class="text-link glow-link" target="_blank">💼 LinkedIn</a>
-        <a href="{% static 'portfolio/files/your_resume.pdf' %}" class="text-link glow-link" target="_blank">📄 Resume</a>
+        <a href="mailto:{{ portfolio.social_links.portfolio_email }}" class="text-link glow-link" target="_blank">📧 Email</a>
+        <a href="https://github.com/{{ portfolio.social_links.portfolio_github_user }}" class="text-link glow-link" target="_blank">🌐 GitHub</a>
+        <a href="{{ portfolio.social_links.portfolio_linkedin }}" class="text-link glow-link" target="_blank">💼 LinkedIn</a>
+        <a href="{% static portfolio.user_info.resume_pdf %}" class="text-link glow-link" target="_blank">📄 Resume</a>
+
       </div>
     </div>
   </div>
@@ -260,13 +274,13 @@ say_my_name()
   </div>
 
   <div class="contact-buttons-container center">
-    <a href="mailto:your_email" target="_blank" class="glass-button">
+    <a href="{{ portfolio.social_links.portfolio_email }}" target="_blank" class="glass-button">
       📧 Email Me
     </a>
-    <a href="https://linkdin_profile" target="_blank" class="glass-button">
+    <a href="{{ portfolio.social_links.portfolio_linkedin }}" target="_blank" class="glass-button">
       💼 LinkedIn
     </a>
-    <a href="https://github.com/your_github" target="_blank" class="glass-button">
+    <a href="https://github.com/{{ portfolio.social_links.github_user_name }}" target="_blank" class="glass-button">
       🌐 GitHub
     </a>
   </div>
@@ -275,7 +289,7 @@ say_my_name()
   <hr class="section-divider" />
   <!-- Footer -->
   <footer>
-    <p>© {{ 2025 }} Your Name. Personal Portfolio.</p>
+    <p>© {{ 2025 }} {{ portfolio.user_info.portfolio_name }}. Personal Portfolio.</p>
   </footer>
 </body>
 </html>
