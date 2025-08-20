@@ -1,11 +1,13 @@
 import json
 import random
+from typing import List
+
 import requests
 from pathlib import Path
 from django.conf import settings
 from django.shortcuts import render
 from .forms import ContactForm
-from .models import PortfolioConfig
+from .models import PortfolioConfig, Project
 
 
 # Load static JSON
@@ -39,6 +41,9 @@ def fetch_github_repos(username):
         print(f"[GitHub Fetch Error] {e}")
     return []
 
+def get_featured_projects() -> List[Project]:
+    return list(Project.objects.filter(featured=True).order_by('order')[:3])
+
 # Deduplicate
 def get_unique_projects(projects):
     seen = set()
@@ -52,9 +57,13 @@ def get_unique_projects(projects):
 # Home Page – show 3 random projects
 def index(request):
     github_username = PortfolioConfig.objects.filter(block='social_links', key='portfolio_github_user').first().value
-    github_projects = fetch_github_repos(github_username)
-    unique_projects = get_unique_projects(github_projects)
-    featured = random.sample(unique_projects, min(3, len(unique_projects)))
+    # Original version (only github)
+    # github_projects = fetch_github_repos(github_username)
+    # unique_projects = get_unique_projects(github_projects)
+    # featured = random.sample(unique_projects, min(3, len(unique_projects)))
+
+    # Changed version (projects from table)
+    featured = get_featured_projects()
 
     return render(request, 'index.html', {
         'projects': featured,

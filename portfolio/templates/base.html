@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}{{ portfolio.user_info.portfolio_name }} | Portfolio{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="{% static 'portfolio/images/favicon.png' %}" />
+  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <script defer src="{% static 'portfolio/js/main.js' %}"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+  <div id="scroll-progress"></div>
+
+  <!-- Navbar -->
+  <button class="hamburger" aria-label="Toggle Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <nav class="pill-navbar">
+    <img src="{{ portfolio.images.avatar_url }}" alt="{{ portfolio.user_info.portfolio_name }} Avatar" class="navbar-avatar" />
+    <div class="brand">{{ portfolio.user_info.portfolio_name }}<br><small>{{ portfolio.user_info.portfolio_title }}</small></div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#certificates" class="nav-link">Certificates</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+  </nav>
+
+  {% block content %}{% endblock %}
+
+  <!-- Footer -->
+  <footer>
+    <p>© {{ 2025 }} {{ portfolio.user_info.portfolio_name }}. Personal Portfolio.</p>
+  </footer>
+</body>
+</html>
