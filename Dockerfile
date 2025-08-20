@@ -15,10 +15,11 @@ COPY . .
 
 # Выполняем миграции и собираем статические файлы
 RUN python manage.py migrate
+RUN python manage.py init_portfolio_config
 RUN python manage.py collectstatic --noinput
 
 # Указываем порт
 EXPOSE 8000
 
 # Запускаем приложение с Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "portfolio.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "portfolio_site.wsgi:application"]

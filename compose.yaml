@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   web:
+    container_name: tehspec_app
     build:
       context: .
       dockerfile: Dockerfile
@@ -13,9 +14,10 @@ services:
       - DEBUG=False
     expose:
       - 8000
-    command: gunicorn --bind 0.0.0.0:8000 portfolio.wsgi:application
+    command: gunicorn --bind 0.0.0.0:8000 portfolio_site.wsgi:application
 
   nginx:
+    container_name: tehspec_nginx
     image: nginx:alpine
     ports:
       - "8092:80"
