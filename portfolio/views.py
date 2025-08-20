@@ -5,6 +5,7 @@ from typing import List
 import requests
 from pathlib import Path
 from django.conf import settings
+from portfolio_site import settings as app_settings
 from django.shortcuts import render, get_object_or_404
 from .forms import ContactForm
 from .models import PortfolioConfig, Project
@@ -119,3 +120,8 @@ def project_detail(request, project_id):
     return render(request, 'project_detail.html', {
         'project': project
     })
+
+
+def csrf_failure(request, reason=""):
+    ctx = {'message': app_settings.CORS_ALLOWED_ORIGINS}
+    return render(request, 'csrf_view.html', ctx)

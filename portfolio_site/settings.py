@@ -95,3 +95,5 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # === DEFAULT FIELD TYPE ===
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CSRF_FAILURE_VIEW = 'portfolio.views.csrf_failure'
