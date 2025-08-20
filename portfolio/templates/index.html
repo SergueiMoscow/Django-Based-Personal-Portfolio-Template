@@ -1,40 +1,12 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>{{ portfolio.user_info.portfolio_name }} | Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" href="{% static 'portfolio/images/favicon.png' %}" />
-  <link rel="stylesheet" href="{% static 'portfolio/css/style.css' %}" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-  <script defer src="{% static 'portfolio/js/main.js' %}"></script>
+{% block extra_head %}
   <script>
     window.portfolioRoles = {{ portfolio.user_info.roles|safe }};
   </script>
-</head>
+{% endblock %}
 
-<body>
-  <div id="scroll-progress"></div>
-
-  <!-- Navbar -->
-  <button class="hamburger" aria-label="Toggle Menu">
-    <span></span>
-    <span></span>
-    <span></span>
-  </button>
-  <nav class="pill-navbar">
-    <img src="{{ portfolio.images.avatar_url }}" alt="{{ portfolio.user_info.portfolio_name }} Avatar" class="navbar-avatar" />
-    <div class="brand">{{ portfolio.user_info.portfolio_name }}<br><small>{{ portfolio.user_info.portfolio_title }}</small></div>
-    <div class="nav-links">
-      <a href="#hero" class="nav-link">Home</a>
-      <a href="#about" class="nav-link">About</a>
-      <a href="#projects" class="nav-link">Projects</a>
-      <a href="#certificates" class="nav-link">Certificates</a>
-      <a href="#contact" class="nav-link">Contact</a>
-    </div>
-  </nav>
-
+{% block content %}
   <!-- Hero -->
 <header id="hero" class="hero centered section scroll-fade"
   style="background: linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
@@ -96,35 +68,6 @@
     </div>
   </div>
 </section>
-
-  <hr class="section-divider" />
-
-  <!-- Developer & Drive -->
-  <section id="dev-drive" class="section scroll-fade">
-    <div class="section-header">
-      <h2 class="section-title">💻 Developer & Drive</h2>
-    </div>
-    <div class="dual-cards">
-      <div class="glass-card dev-card full-typing">
-        <h3 class="dev-title">💻 Developer</h3>
-        <div id="devTyping" class="typing-bar expanded"></div>
-      </div>
-      <div class="glass-card drive-card">
-        <div class="code-snippet">
-<pre><code class="python" id="codeText">
-def say_my_name():
-    print("Your Name")
-
-say_my_name()
-</code></pre>
-        </div>
-        <div class="drive-info">
-          <h4>🚀 What Drives Me</h4>
-          <p>I’m passionate about building secure and scalable web apps, contributing to open-source cybersecurity tools, and mentoring developers to grow.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <hr class="section-divider" />
 
@@ -286,10 +229,4 @@ say_my_name()
   </div>
 </section>
 
-  <hr class="section-divider" />
-  <!-- Footer -->
-  <footer>
-    <p>© {{ 2025 }} {{ portfolio.user_info.portfolio_name }}. Personal Portfolio.</p>
-  </footer>
-</body>
-</html>
+{% endblock %}
