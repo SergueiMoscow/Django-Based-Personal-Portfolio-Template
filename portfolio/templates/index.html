@@ -15,7 +15,7 @@
   <img src="{{ portfolio.images.avatar_url }}" alt="{{ portfolio.user_info.portfolio_name }} Avatar" class="avatar-hero hero-avatar" />
   <!-- img src="{% static 'portfolio/images/avatar.jpg' %}" alt="Profile Image" class="avatar-hero hero-avatar" / -->
 
-  <h1 class="title">Hi, I’m {{ portfolio.user_info.portfolio_name }} 👋</h1>
+  <h1 class="title">Привет, я {{ portfolio.user_info.portfolio_name }} 👋</h1>
   <h3 class="subtitle"><span id="typing"></span></h3>
 
   <p class="subtitle">
@@ -158,15 +158,7 @@
 </section>
 
 {% include 'modal.html' %}
-<!-- Fullscreen Image Modal - ->
-<div id="image-modal" class="image-modal" role="dialog" aria-modal="true" aria-label="Certificate Preview">
-  <div class="modal-card">
-    <button class="close-modal" aria-label="Close Preview">&times;</button>
-    <img id="modal-img" alt="Certificate Preview">
-  </div>
-</div>
--->
-  <hr class="section-divider" />
+<hr class="section-divider" />
 
   <!-- Volunteer -->
 <section id="volunteer" class="section scroll-fade">

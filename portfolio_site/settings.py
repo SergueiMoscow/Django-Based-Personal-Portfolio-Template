@@ -8,7 +8,7 @@ env.read_env(str(BASE_DIR / '.env'))
 
 # === SECURITY SETTINGS ===
 SECRET_KEY = env.str('SECRET_KEY')
-DEBUG = env.bool('DEBUG', False)
+DEBUG = env.str('DEBUG', 'false') == 'true'
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
 # === APPLICATIONS ===
