@@ -18,7 +18,7 @@ class PortfolioConfigAdmin(admin.ModelAdmin):
 
 @admin.register(ProjectImage)
 class ProjectImageAdmin(admin.ModelAdmin):
-    list_display = ('project', 'image_tag', 'caption', 'order')
+    list_display = ('project', 'image_tag', 'caption', 'description', 'order')
     list_editable = ('order',)
     readonly_fields = ('image_tag',)
     list_filter = ('project',)

@@ -47,6 +47,7 @@ class ProjectImage(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images', verbose_name="Проект")
     image = models.ImageField(upload_to='projects/images/', verbose_name="Изображение")
     caption = models.CharField(max_length=200, blank=True, verbose_name="Подпись")
+    description = models.TextField(blank=True, verbose_name="Описание")
     order = models.PositiveIntegerField(default=0, verbose_name="Порядок")
 
     class Meta:

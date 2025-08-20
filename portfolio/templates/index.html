@@ -11,17 +11,17 @@
 <header id="hero" class="hero centered section scroll-fade"
   style="background: linear-gradient(rgba(13, 13, 13, 0.9), rgba(13, 13, 13, 0.9)),
          url('{% static 'portfolio/images/background_1.jpg' %}') center/cover no-repeat;">
-  
+
   <img src="{{ portfolio.images.avatar_url }}" alt="{{ portfolio.user_info.portfolio_name }} Avatar" class="avatar-hero hero-avatar" />
   <!-- img src="{% static 'portfolio/images/avatar.jpg' %}" alt="Profile Image" class="avatar-hero hero-avatar" / -->
-  
+
   <h1 class="title">Hi, I’m {{ portfolio.user_info.portfolio_name }} 👋</h1>
   <h3 class="subtitle"><span id="typing"></span></h3>
-  
+
   <p class="subtitle">
     {{ portfolio.user_info.portfolio_subtitle }}
   </p>
-  
+
   <div class="scroll-down">☟</div>
 </header>
 
@@ -157,14 +157,15 @@
   </div>
 </section>
 
-<!-- Fullscreen Image Modal -->
+{% include 'modal.html' %}
+<!-- Fullscreen Image Modal - ->
 <div id="image-modal" class="image-modal" role="dialog" aria-modal="true" aria-label="Certificate Preview">
   <div class="modal-card">
     <button class="close-modal" aria-label="Close Preview">&times;</button>
     <img id="modal-img" alt="Certificate Preview">
   </div>
 </div>
-
+-->
   <hr class="section-divider" />
 
   <!-- Volunteer -->

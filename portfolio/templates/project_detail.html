@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ project.title }} | {{ portfolio.user_info.portfolio_name }}
+{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<style>
+  body {
+    position: relative;
+    background: transparent;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: url("{% static 'portfolio/images/bg.jpg' %}") center center / cover no-repeat fixed;
+    filter: blur(10px) brightness(0.4);
+    z-index: -1;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="section scroll-fade" style="padding: 100px 20px;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto;">
+    <div style="text-align: right; margin-bottom: -30px;">
+      <a href="{% url 'projects' %}" class="section-label text-link">← Назад к проектам</a>
+    </div>
+    <h2 class="section-title" style="text-align: center; margin-bottom: 20px;">{{ project.title }}</h2>
+    <p class="section-description" style="text-align: center; margin-bottom: 40px;">
+      {{ project.description }}
+    </p>
+    {% if project.is_github %}
+    <p style="text-align: center;">
+      <a href="{{ project.link }}" target="_blank" class="text-link glow-link">🔗 GitHub</a>
+    </p>
+    {% elif project.other_link %}
+    <p style="text-align: center;">
+      <a href="{{ project.other_link }}" target="_blank" class="text-link glow-link">🔗 Просмотр</a>
+    </p>
+    {% endif %}
+    <div class="project-details">
+      {% if project.image %}
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 order-md-1">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid rounded">
+        </div>
+        <div class="col-md-6 order-md-2">
+          <p>Основное изображение проекта</p>
+        </div>
+      </div>
+      {% endif %}
+      {% for image in project.images.all %}
+      <div class="row g-4 mb-4">
+        <div class="col-md-6 {% cycle 'order-md-1' 'order-md-2' %}">
+          <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}" class="img-fluid rounded">
+        </div>
+        <div class="col-md-6 {% cycle 'order-md-2' 'order-md-1' %}">
+          <h4>{{ image.caption|default:"Изображение проекта" }}</h4>
+          <p>{{ image.description|default:"Описание отсутствует" }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

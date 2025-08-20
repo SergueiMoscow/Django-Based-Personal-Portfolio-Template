@@ -5,7 +5,7 @@ from typing import List
 import requests
 from pathlib import Path
 from django.conf import settings
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .forms import ContactForm
 from .models import PortfolioConfig, Project
 
@@ -44,6 +44,11 @@ def fetch_github_repos(username):
 def get_featured_projects() -> List[Project]:
     return list(Project.objects.filter(featured=True).order_by('order')[:3])
 
+
+def get_all_projects() -> List[Project]:
+    return list(Project.objects.filter(featured=True).order_by('order'))
+
+
 # Deduplicate
 def get_unique_projects(projects):
     seen = set()
@@ -74,9 +79,13 @@ def index(request):
 
 # Projects Page – all GitHub repos
 def projects(request):
-    github_username = PortfolioConfig.objects.filter(block='social_links', key='portfolio_github_user').first().value
-    github_projects = fetch_github_repos(github_username)
-    all_projects = get_unique_projects(github_projects)
+    # Version with only github projects
+    # github_username = PortfolioConfig.objects.filter(block='social_links', key='portfolio_github_user').first().value
+    # github_projects = fetch_github_repos(github_username)
+    # all_projects = get_unique_projects(github_projects)
+
+    # Version with projects from table
+    all_projects = get_all_projects()
     return render(request, 'projects.html', {
         'projects': all_projects
     })
@@ -102,4 +111,11 @@ def contact(request):
         form = ContactForm()
     return render(request, 'contact.html', {
         'form': form
+    })
+
+
+def project_detail(request, project_id):
+    project = get_object_or_404(Project, id=project_id)
+    return render(request, 'project_detail.html', {
+        'project': project
     })

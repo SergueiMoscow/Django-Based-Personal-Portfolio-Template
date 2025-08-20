@@ -17,6 +17,13 @@ html, body {
   cursor: none;
 }
 
+body, body * {
+  user-select: none; /* Запрещаем выделение текста */
+  -webkit-user-select: none; /* Для Safari */
+  -moz-user-select: none; /* Для Firefox */
+  -ms-user-select: none; /* Для Edge */
+}
+
 /* === Scroll Progress Bar === */
 #scroll-progress {
   position: fixed;
