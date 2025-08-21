@@ -51,12 +51,12 @@
           <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid h300 rounded">
         </div>
         <div class="col-md-6 order-md-2">
-          <h4>О проекте</h4>
+          <h4 class="color-cream">О проекте</h4>
           <p>{{ project.description }}</p>
         </div>
         {% else %}
         <div class="col-md-12">
-          <h4>О проекте</h4>
+          <h4 class="color-cream">О проекте</h4>
           <p>{{ project.description }}</p>
         </div>
         {% endif %}
@@ -64,12 +64,12 @@
       <!-- Дополнительные изображения -->
       {% for image in project.images.all %}
       <div class="row g-4 mb-4">
-        <div class="col-md-6 {% cycle 'order-md-1' 'order-md-2' %}">
+        <div class="col-md-6 {% cycle 'order-md-2' 'order-md-1' %}">
           <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}" class="img-fluid h300 rounded">
         </div>
-        <div class="col-md-6 {% cycle 'order-md-2' 'order-md-1' %}">
-          <h4>{{ image.caption|default:"Изображение проекта" }}</h4>
-          <p>{{ image.description|default:"Описание отсутствует" }}</p>
+        <div class="col-md-6 {% cycle 'order-md-1' 'order-md-2' %}">
+          <h4 class="color-cream">{{ image.caption|default:"Изображение проекта" }}</h4>
+          <p class="color-cream">{{ image.description|default:"Описание отсутствует" }}</p>
         </div>
       </div>
       {% endfor %}
