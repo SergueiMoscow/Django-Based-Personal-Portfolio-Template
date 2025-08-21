@@ -138,11 +138,12 @@
       <div class="flip-card-inner">
         <div class="flip-card-front">
           <h3>{{ cert.name }}</h3>
+          <p>{{ cert.description }}</p><p>---</p>
           <p>{{ cert.issuer }} ({{ cert.year }})</p>
         </div>
         <div class="flip-card-back">
           {% if cert.image %}
-          <img src="{% static 'portfolio/images/certificates/' %}{{ cert.image }}"
+          <img src="{{ cert.image.url }}"
                alt="{{ cert.name }}"
                class="preview-image"
                style="max-width: 100%; max-height: 180px; border-radius: 8px; box-shadow: 0 0 10px #fde4c388; cursor: zoom-in;">

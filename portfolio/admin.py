@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from portfolio.models import Project, PortfolioConfig, ProjectImage
+from portfolio.models import Project, PortfolioConfig, ProjectImage, Certificate
+
 
 class ImagesInline(admin.StackedInline):
     model = ProjectImage
@@ -26,3 +27,12 @@ class ProjectImageAdmin(admin.ModelAdmin):
     list_editable = ('order',)
     readonly_fields = ('image_tag',)
     list_filter = ('project',)
+
+
+@admin.register(Certificate)
+class CertificateAdmin(admin.ModelAdmin):
+    list_display = ('name', 'issuer', 'year', 'image_tag', 'order')
+    list_editable = ('order',)
+    readonly_fields = ('image_tag',)
+    search_fields = ('name', 'issuer', 'description')
+    list_filter = ('issuer', 'year')

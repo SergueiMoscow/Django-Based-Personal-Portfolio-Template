@@ -8,7 +8,7 @@ from django.conf import settings
 from portfolio_site import settings as app_settings
 from django.shortcuts import render, get_object_or_404
 from .forms import ContactForm
-from .models import PortfolioConfig, Project
+from .models import PortfolioConfig, Project, Certificate
 
 
 # Load static JSON
@@ -60,6 +60,9 @@ def get_unique_projects(projects):
             unique.append(p)
     return unique
 
+def get_all_certificates() -> List[Certificate]:
+    return list(Certificate.objects.all().order_by('year'))
+
 # Home Page – show 3 random projects
 def index(request):
     github_username = PortfolioConfig.objects.filter(block='social_links', key='portfolio_github_user').first().value
@@ -73,7 +76,7 @@ def index(request):
 
     return render(request, 'index.html', {
         'projects': featured,
-        'certificates': load_json('certificates.json')[:3],
+        'certificates': get_all_certificates(), # load_json('certificates.json')[:3],
         'skills': load_json('skills.json'),
         'volunteers': load_json('volunteer.json'),
     })
