@@ -108,7 +108,7 @@
           >
 
           <div style="display: flex; flex-direction: column; gap: 6px;">
-            <a href="{{ p.link }}" target="_blank" rel="noopener" class="text-link glow-link">🔗 GitHub Repo</a>
+            <a href="{% url 'project_detail' project_id=p.id %}" target="_blank" rel="noopener" class="text-link glow-link">📄 Подробнее</a>
           </div>
         </div>
 

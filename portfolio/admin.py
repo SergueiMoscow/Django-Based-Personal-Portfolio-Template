@@ -2,6 +2,9 @@ from django.contrib import admin
 
 from portfolio.models import Project, PortfolioConfig, ProjectImage
 
+class ImagesInline(admin.StackedInline):
+    model = ProjectImage
+    extra = 0
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
@@ -9,6 +12,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_editable = ('is_github', 'featured', 'order')
     list_display_links = ('title',)
     search_fields = ('title', 'description')
+    inlines = [ImagesInline]
 
 
 @admin.register(PortfolioConfig)

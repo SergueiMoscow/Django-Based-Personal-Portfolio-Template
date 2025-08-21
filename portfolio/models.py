@@ -4,6 +4,7 @@ from django.utils.safestring import mark_safe
 
 class Project(models.Model):
     title = models.CharField(max_length=200, verbose_name="Название")
+    short = models.CharField(blank=True, verbose_name="Кратко")
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(upload_to='projects/', blank=True, null=True, verbose_name="Основное изображение")  # Оставляем, но делаем необязательным
     link = models.URLField(blank=True, verbose_name="Ссылка на проект")  # Для GitHub или других ссылок
