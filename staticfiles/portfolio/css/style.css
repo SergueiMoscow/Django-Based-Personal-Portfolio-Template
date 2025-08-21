@@ -1356,3 +1356,7 @@ footer {
   }
 
 }
+
+.h300 {
+  max-height: 300px;
+}

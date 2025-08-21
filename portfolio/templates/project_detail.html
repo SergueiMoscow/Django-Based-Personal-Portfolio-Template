@@ -48,7 +48,7 @@
       <div class="row g-4 mb-4">
         {% if project.image %}
         <div class="col-md-6 order-md-1">
-          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid h200 rounded">
+          <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid h300 rounded">
         </div>
         <div class="col-md-6 order-md-2">
           <h4>О проекте</h4>
@@ -65,7 +65,7 @@
       {% for image in project.images.all %}
       <div class="row g-4 mb-4">
         <div class="col-md-6 {% cycle 'order-md-1' 'order-md-2' %}">
-          <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}" class="img-fluid h200 rounded">
+          <img src="{{ image.image.url }}" alt="{{ image.caption|default:project.title }}" class="img-fluid h300 rounded">
         </div>
         <div class="col-md-6 {% cycle 'order-md-2' 'order-md-1' %}">
           <h4>{{ image.caption|default:"Изображение проекта" }}</h4>
