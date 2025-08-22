@@ -30,7 +30,7 @@
 {% block content %}
 <section class="section scroll-fade" style="padding: 100px 20px;">
   <div class="container" style="max-width: 1100px; margin: 0 auto;">
-    <div style="text-align: right; margin-bottom: -30px;">
+    <div style="text-align: right; margin: 30px 0;">
       <a href="{% url 'projects' %}" class="section-label text-link">← Назад к проектам</a>
     </div>
     <h2 class="section-title" style="text-align: center; margin-bottom: 20px;">{{ project.title }}</h2>
@@ -46,9 +46,13 @@
     <div class="project-details">
       <!-- Основное описание и изображение -->
       <div class="row g-4 mb-4">
-        {% if project.image %}
+        {% if project.image or project.video %}
         <div class="col-md-6 order-md-1">
+          {% if project.video %}
+            {% include "div_video.html" with item=project %}
+          {% else %}
           <img src="{{ project.image.url }}" alt="{{ project.title }}" class="img-fluid h300 rounded">
+          {% endif %}
         </div>
         <div class="col-md-6 order-md-2">
           <h4 class="color-cream">О проекте</h4>

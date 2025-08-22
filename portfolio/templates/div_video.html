@@ -1,0 +1,43 @@
+<!-- div_video.html -->
+<div class="project-media">
+    {% load static %}
+    {% if item.video %}
+        <!-- Показываем видео -->
+        <video
+            src="{{ item.video.url }}"
+            class="project-thumbnail"
+            style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.3);"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+        >
+            Ваш браузер не поддерживает видео.
+        </video>
+    {% elif item.image %}
+        <!-- Показываем изображение -->
+        <img
+            src="{{ item.image.url }}"
+            alt="{{ item.title }} Thumbnail"
+            class="project-thumbnail"
+            style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.3);"
+        >
+    {% elif 'github.com' in item.link %}
+        <!-- GitHub изображение -->
+        <img
+            src="https://opengraph.githubassets.com/1/{{ item.link|cut:'https://github.com/' }}"
+            alt="{{ item.title }} Thumbnail"
+            class="project-thumbnail"
+            style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.3);"
+        >
+    {% else %}
+        <!-- Дефолтное изображение -->
+        <img
+            src="{% static 'portfolio/images/projects/default.png' %}"
+            alt="{{ item.title }} Thumbnail"
+            class="project-thumbnail"
+            style="width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; margin-bottom: 12px; box-shadow: 0 0 12px rgba(0,0,0,0.3);"
+        >
+    {% endif %}
+</div>

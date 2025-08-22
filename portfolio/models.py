@@ -1,3 +1,4 @@
+from django.core.validators import FileExtensionValidator
 from django.db import models
 from django.utils.safestring import mark_safe
 
@@ -7,6 +8,13 @@ class Project(models.Model):
     short = models.CharField(blank=True, verbose_name="Кратко")
     description = models.TextField(verbose_name="Описание")
     image = models.ImageField(upload_to='projects/', blank=True, null=True, verbose_name="Основное изображение")
+    video = models.FileField(
+        upload_to='projects/videos/',
+        blank=True,
+        null=True,
+        verbose_name="Видео",
+        validators=[FileExtensionValidator(allowed_extensions=['MOV', 'avi', 'mp4', 'webm', 'mkv'])],
+    )
     link = models.URLField(blank=True, verbose_name="Ссылка на проект")  # Для GitHub или других ссылок
     is_github = models.BooleanField(default=False, verbose_name="GitHub проект")  # Добавлено: флаг для GitHub
     other_link = models.URLField(blank=True, null=True, verbose_name="Другая ссылка")  # Добавлено: для Tilda/Salebot
