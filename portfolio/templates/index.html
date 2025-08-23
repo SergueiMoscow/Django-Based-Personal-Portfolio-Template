@@ -62,6 +62,7 @@
         <a href="mailto:{{ portfolio.social_links.portfolio_email }}" class="text-link glow-link" target="_blank">📧 Email</a>
         <a href="https://github.com/{{ portfolio.social_links.portfolio_github_user }}" class="text-link glow-link" target="_blank">🌐 GitHub</a>
         <a href="{{ portfolio.social_links.portfolio_linkedin }}" class="text-link glow-link" target="_blank">💼 LinkedIn</a>
+        <a href="{{ portfolio.social_links.portfolio_telegram }}" class="text-link glow-link" target="_blank">✈️ Telegram</a>
         <a href="{% static portfolio.user_info.resume_pdf %}" class="text-link glow-link" target="_blank">📄 Resume</a>
 
       </div>
@@ -165,11 +166,12 @@
 {% include 'modal.html' %}
 <hr class="section-divider" />
 
+{# comment #}
   <!-- Volunteer -->
 <section id="volunteer" class="section scroll-fade">
-  <h2 class="section-title">🤝 Volunteer Work</h2>
+  <h2 class="section-title">🤝 Коллаборации</h2>
   <p class="section-description">
-    Leadership and event execution experience through college societies and technical clubs.
+    Опыт успешной коллаборации и реализации проектов в командной работе.
   </p>
 
   <div id="volunteer-container" class="card-container flip-container" style="justify-content: center;">
@@ -204,6 +206,7 @@
 </section>
 
   <hr class="section-divider" />
+{# endcomment #}
 
 <!-- Contact -->
 <section id="contact" class="section scroll-fade">
@@ -221,7 +224,10 @@
     <a href="{{ portfolio.social_links.portfolio_linkedin }}" target="_blank" class="glass-button">
       💼 LinkedIn
     </a>
-    <a href="https://github.com/{{ portfolio.social_links.github_user_name }}" target="_blank" class="glass-button">
+    <a href="{{ portfolio.social_links.portfolio_telegram }}" target="_blank" class="glass-button">
+      ✈️ Telegram
+    </a>
+    <a href="https://github.com/{{ portfolio.social_links.portfolio_github_user }}" target="_blank" class="glass-button">
       🌐 GitHub
     </a>
   </div>
